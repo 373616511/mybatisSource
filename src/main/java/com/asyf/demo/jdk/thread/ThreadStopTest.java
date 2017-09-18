@@ -1,4 +1,4 @@
-package com.asyf.jdk.thread;
+package com.asyf.demo.jdk.thread;
 
 /**
  * Created by Administrator on 2017/9/8.

@@ -1,4 +1,4 @@
-package com.asyf.jdk.thread;
+package com.asyf.demo.jdk.thread;
 
 public class ThreadTest {
 
