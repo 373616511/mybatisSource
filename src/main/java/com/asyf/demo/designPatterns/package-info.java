@@ -3,4 +3,4 @@
  *
  * 设计模式
  */
-package com.asyf.demo.designMode;
+package com.asyf.demo.designPatterns;
