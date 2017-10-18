@@ -7,7 +7,7 @@ public class Test {
     public static void main(String[] args) throws Exception {
         //120
         String a = "230232568963";
-                    //418477175805
+        String b = "418477175805";
         int num = 0;
         while (true) {
             num++;
