@@ -26,6 +26,8 @@ public class HelloServiceProxy implements InvocationHandler {
         Object result = null;
         //反射方法前调用
         System.err.println("准备说hello");
+        System.err.println(Object.class + "---" + method.getDeclaringClass());
+        System.err.println(Object.class.equals(method.getDeclaringClass()));
         //执行方法，相当于调用HelloServiceImpl类的sayHello方法
         result = method.invoke(target, args);
         //反射方法后调用
