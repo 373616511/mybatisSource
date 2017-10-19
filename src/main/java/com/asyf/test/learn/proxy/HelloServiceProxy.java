@@ -14,7 +14,8 @@ public class HelloServiceProxy implements InvocationHandler {
     //绑定委托对象并返回一个代理
     public Object bind(Object target) {
         this.target = target;
-        //jdk代理需要提供接口
+        //jdk代理需要提供接口target.getClass().getInterfaces()
+        //System.err.println("接口：" + target.getClass().getInterfaces().getClass().getName());
         return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
     }
 
