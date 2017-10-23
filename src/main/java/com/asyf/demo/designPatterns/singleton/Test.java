@@ -9,4 +9,7 @@ public class Test {
         Singleton instance2 = Singleton.getInstance();
         System.out.println(instance.equals(instance2));//true
     }
+    public static class V{
+
+    }
 }
