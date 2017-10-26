@@ -64,6 +64,7 @@ public abstract class BaseExecutor implements Executor {
 
   protected BaseExecutor(Configuration configuration, Transaction transaction) {
     this.transaction = transaction;
+    //ConcurrentLinkedQueue是一个基于链接节点的无界线程安全队列，
     this.deferredLoads = new ConcurrentLinkedQueue<DeferredLoad>();
     this.localCache = new PerpetualCache("LocalCache");
     this.localOutputParameterCache = new PerpetualCache("LocalOutputParameterCache");

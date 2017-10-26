@@ -21,6 +21,8 @@ package org.apache.ibatis.executor;
 public class ErrorContext {
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator","\n");
+  //ThreadLocal（线程本地变量），主要用于多线程中同一线程不同类中的数据传递用。
+  //每个线程给开一个错误上下文，防止多线程问题
   private static final ThreadLocal<ErrorContext> LOCAL = new ThreadLocal<ErrorContext>();
 
   private ErrorContext stored;

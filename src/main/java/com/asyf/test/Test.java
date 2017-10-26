@@ -18,10 +18,10 @@ public class Test {
         SqlSession s = null;
         try {
             String resource = "mybatis-config.xml";
-            InputStream inputStream = null;
-            inputStream = Resources.getResourceAsStream(resource);
-
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            //初始化 sqlSessionFactory 读取 mybatis-config.xml 配置文件---configuration
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            //openSessionFromDataSource---executor---sqlSession
             s = sqlSessionFactory.openSession();
             System.out.println("SqlSession--" + s);
             UserMapper u = s.getMapper(UserMapper.class);

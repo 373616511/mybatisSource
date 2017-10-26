@@ -92,6 +92,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         this.parser = parser;
     }
 
+    //解析
     public Configuration parse() {
         if (parsed) {
             throw new BuilderException("Each XMLConfigBuilder can only be used once.");
@@ -101,6 +102,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         return configuration;
     }
 
+    //解析mybatis-config.xml
     private void parseConfiguration(XNode root) {
         try {
             //issue #117 read properties first
