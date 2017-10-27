@@ -99,6 +99,7 @@ public class XMLConfigBuilder extends BaseBuilder {
             throw new BuilderException("Each XMLConfigBuilder can only be used once.");
         }
         parsed = true;
+        //解析xml
         parseConfiguration(parser.evalNode("/configuration"));
         return configuration;
     }
