@@ -85,6 +85,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
         //BaseBuilder的构造方法，初始化
         super(new Configuration());
+        //每个线程给开一个错误上下文，防止多线程问题
         ErrorContext.instance().resource("SQL Mapper Configuration");
         this.configuration.setVariables(props);
         this.parsed = false;
@@ -369,6 +370,7 @@ public class XMLConfigBuilder extends BaseBuilder {
                     if (resource != null && url == null && mapperClass == null) {
                         ErrorContext.instance().resource(resource);
                         InputStream inputStream = Resources.getResourceAsStream(resource);
+                        // sqlFragments = new StrictMap<XNode>("XML fragments parsed from previous mappers");
                         XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
                         mapperParser.parse();
                     } else if (resource == null && url != null && mapperClass == null) {
