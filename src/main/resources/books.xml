@@ -2,7 +2,7 @@
 
 <bookstore>
 
-    <book>
+    <book value="123">
         <title lang="eng">Harry Potter</title>
         <price>29.99</price>
     </book>
