@@ -14,7 +14,9 @@ public class Test {
 
 class MyClass {
 
-    void changeValue(final StringBuffer buffer) {
+    void changeValue(StringBuffer buffer) {
+        buffer = new StringBuffer();
         buffer.append("world");
+        System.out.println("changeValue方法中：" + buffer.toString());
     }
 }
