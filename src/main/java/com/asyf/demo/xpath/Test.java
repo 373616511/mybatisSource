@@ -69,7 +69,7 @@ public class Test {
             System.err.println("nodes.getLength():" + nodes.getLength());
             for (int i = 0; i < nodes.getLength(); i++) {
                 Node item = nodes.item(i);
-                System.err.println(item.getNodeName() + "--" + nodes.item(i).getNodeValue());
+                System.err.println(item.getNodeName() + "--" + nodes.item(i).getNodeType());
             }
         } catch (IOException e) {
             e.printStackTrace();

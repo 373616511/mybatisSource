@@ -277,10 +277,13 @@ public class XMLConfigBuilder extends BaseBuilder {
             }
             for (XNode child : context.getChildren()) {
                 String id = child.getStringAttribute("id");
+                //判断environment.equals(id)是否成立
                 if (isSpecifiedEnvironment(id)) {
                     TransactionFactory txFactory = transactionManagerElement(child.evalNode("transactionManager"));
+                    //数据源的获取
                     DataSourceFactory dsFactory = dataSourceElement(child.evalNode("dataSource"));
                     DataSource dataSource = dsFactory.getDataSource();
+                    //静态内部类
                     Environment.Builder environmentBuilder = new Environment.Builder(id)
                             .transactionFactory(txFactory)
                             .dataSource(dataSource);

@@ -1,23 +1,14 @@
 package com.asyf.demo.designPatterns.builder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by Administrator on 2017/10/20.
+ * Created by Administrator on 2017/11/7.
  */
-public class Builder {
-    private List<Sender> list = new ArrayList<Sender>();
+public abstract class Builder {
+    protected abstract void buildPartA();
 
-    public void produceMailSender(int count) {
-        for (int i = 0; i < count; i++) {
-            list.add(new MailSender());
-        }
-    }
+    protected abstract void buildPartB();
 
-    public void produceSmsSender(int count) {
-        for (int i = 0; i < count; i++) {
-            list.add(new SmsSender());
-        }
-    }
+    protected abstract void buildPartC();
+
+    protected abstract Product getResult();
 }

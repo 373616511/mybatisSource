@@ -6,7 +6,8 @@ package com.asyf.demo.designPatterns.builder;
 public class Test {
     //建造者模式（Builder）
     public static void main(String[] args) {
-        Builder builder = new Builder();
-        builder.produceMailSender(10);
+        BuilderDirector director = new BuilderDirector(new BuilderB());
+        Product product = director.build();
+        product.show();
     }
 }
