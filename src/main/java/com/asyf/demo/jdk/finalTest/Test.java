@@ -13,9 +13,9 @@ public class Test {
 }
 
 class MyClass {
-
-    void changeValue(StringBuffer buffer) {
-        buffer = new StringBuffer();
+    //final加载形参上，代表引用不能改变（不能指向实参之外的地址，每次修改都是修改实参）
+    void changeValue(final StringBuffer buffer) {
+        //buffer = new StringBuffer();
         buffer.append("world");
         System.out.println("changeValue方法中：" + buffer.toString());
     }
