@@ -88,9 +88,11 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
 
     public void parse() {
+        //resourse = UserMapper.xml 判断名称是resourse的xml是否已经加载过,resourse(String)存储在Set中
         if (!configuration.isResourceLoaded(resource)) {
+            //解析mapper中的配置，sql语句在此解析出来
             configurationElement(parser.evalNode("/mapper"));
-            //loadedResources = new HashSet<String>();
+            //将字符串存储到Set中,loadedResources = new HashSet<String>();
             configuration.addLoadedResource(resource);
             //
             bindMapperForNamespace();
@@ -115,8 +117,11 @@ public class XMLMapperBuilder extends BaseBuilder {
             cacheRefElement(context.evalNode("cache-ref"));
             cacheElement(context.evalNode("cache"));
             parameterMapElement(context.evalNodes("/mapper/parameterMap"));
+            //解析resultMap节点
             resultMapElements(context.evalNodes("/mapper/resultMap"));
+            //sql
             sqlElement(context.evalNodes("/mapper/sql"));
+            //sql语句
             buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
         } catch (Exception e) {
             throw new BuilderException("Error parsing Mapper XML. Cause: " + e, e);

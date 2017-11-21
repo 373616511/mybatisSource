@@ -231,6 +231,7 @@ public class MapperMethod {
                     throw new BindingException("Invalid bound statement (not found): " + statementName);
                 }
             } else {
+                //name = com.asyf.mapper.UserMapper.selectByPrimaryKey
                 name = ms.getId();
                 type = ms.getSqlCommandType();
                 if (type == SqlCommandType.UNKNOWN) {
@@ -261,6 +262,7 @@ public class MapperMethod {
         private final ParamNameResolver paramNameResolver;
 
         public MethodSignature(Configuration configuration, Class<?> mapperInterface, Method method) {
+            //resolvedReturnType = class com.asyf.model.User
             Type resolvedReturnType = TypeParameterResolver.resolveReturnType(method, mapperInterface);
             if (resolvedReturnType instanceof Class<?>) {
                 this.returnType = (Class<?>) resolvedReturnType;

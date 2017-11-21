@@ -49,7 +49,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
         try {
             //System.err.println(Object.class + "---" + method.getDeclaringClass());
             //System.err.println(Object.class.equals(method.getDeclaringClass()));
-            //判断方法是否是接口，是接口则执行
+            //判断方法是否是接口，是对象则执行
             if (Object.class.equals(method.getDeclaringClass())) {
                 return method.invoke(this, args);
             } else if (isDefaultMethod(method)) {
@@ -63,7 +63,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     }
 
     private MapperMethod cachedMapperMethod(Method method) {
-        //methodCache 方法的缓存，build的时候不加载，在创建代理的时候增加
+        //methodCache 方法的缓存，build的时候不加载，在首次执行的时候增加
         MapperMethod mapperMethod = methodCache.get(method);
         if (mapperMethod == null) {
             //获得Mapper的方法

@@ -118,9 +118,11 @@ public class XMLConfigBuilder extends BaseBuilder {
             reflectorFactoryElement(root.evalNode("reflectorFactory"));
             settingsElement(settings);
             // read it after objectFactory and objectWrapperFactory issue #631
+            //解析environments节点--- Configuration 的成员变量 Environment environment 初始化
             environmentsElement(root.evalNode("environments"));
             databaseIdProviderElement(root.evalNode("databaseIdProvider"));
             typeHandlerElement(root.evalNode("typeHandlers"));
+            //解析mappers节点
             mapperElement(root.evalNode("mappers"));
         } catch (Exception e) {
             throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);
@@ -287,6 +289,7 @@ public class XMLConfigBuilder extends BaseBuilder {
                     Environment.Builder environmentBuilder = new Environment.Builder(id)
                             .transactionFactory(txFactory)
                             .dataSource(dataSource);
+                    //environmentBuilder.build()方法创建了Environment对象，使用的构造者设计模式
                     configuration.setEnvironment(environmentBuilder.build());
                 }
             }
