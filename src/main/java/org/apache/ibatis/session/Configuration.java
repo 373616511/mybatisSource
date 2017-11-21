@@ -568,6 +568,7 @@ public class Configuration {
         if (cacheEnabled) {
             executor = new CachingExecutor(executor);
         }
+        //这是一段非常重要的代码，它是采用责任链模式，来产生代理对象。
         executor = (Executor) interceptorChain.pluginAll(executor);
         return executor;
     }

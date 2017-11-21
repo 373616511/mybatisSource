@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-	<plugins>
+	<!--<plugins>
 		<plugin interceptor="com.asyf.plugin.P">
 			<property name="someProperty" value="100" />
 		</plugin>
-	</plugins>
+	</plugins>-->
 
 	<environments default="development">
 		<environment id="development">
