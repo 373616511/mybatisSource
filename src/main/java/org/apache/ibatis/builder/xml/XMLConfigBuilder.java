@@ -83,11 +83,12 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
 
     private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
-        //BaseBuilder的构造方法，初始化
+        //BaseBuilder的构造方法,创建configuration对象，
+        //configuration是XMLConfigBuilder的父类BaseBuilder的成员变量
         super(new Configuration());
         //每个线程给开一个错误上下文，防止多线程问题
         ErrorContext.instance().resource("SQL Mapper Configuration");
-        this.configuration.setVariables(props);
+        this.configuration.setVariables(props);//Properties类
         this.parsed = false;
         this.environment = environment;
         this.parser = parser;
