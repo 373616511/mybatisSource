@@ -556,6 +556,7 @@ public class Configuration {
 
     public Executor newExecutor(Transaction transaction, ExecutorType executorType) {
         executorType = executorType == null ? defaultExecutorType : executorType;
+        //defaultExecutorType 是 null 的时候就是 SIMPLE
         executorType = executorType == null ? ExecutorType.SIMPLE : executorType;
         Executor executor;
         if (ExecutorType.BATCH == executorType) {
@@ -566,6 +567,7 @@ public class Configuration {
             executor = new SimpleExecutor(this, transaction);
         }
         if (cacheEnabled) {
+            //注意：SimpleExecutor 对象 赋值到 CachingExecutor 类的成员变量
             executor = new CachingExecutor(executor);
         }
         //这是一段非常重要的代码，它是采用责任链模式，来产生代理对象。
