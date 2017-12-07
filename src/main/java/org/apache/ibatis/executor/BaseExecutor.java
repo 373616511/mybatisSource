@@ -275,6 +275,7 @@ public abstract class BaseExecutor implements Executor {
     protected abstract List<BatchResult> doFlushStatements(boolean isRollback)
             throws SQLException;
 
+    //抽象方法---SimpleExecutor
     protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql)
             throws SQLException;
 

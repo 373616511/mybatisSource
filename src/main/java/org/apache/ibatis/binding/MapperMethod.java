@@ -40,7 +40,7 @@ import java.util.*;
  * @author Lasse Voss
  */
 public class MapperMethod {
-
+    // SqlCommand 和 MethodSignature 是 MapperMethod 的内部类
     private final SqlCommand command;
     private final MethodSignature method;
 
@@ -216,9 +216,11 @@ public class MapperMethod {
             //执行结果：com.asyf.mapper.UserMapper.selectByPrimaryKey
             String statementName = mapperInterface.getName() + "." + method.getName();
             MappedStatement ms = null;
+            //String parentStatementNameTEST = method.getDeclaringClass().getName() + "." + method.getName();
             if (configuration.hasStatement(statementName)) {
                 ms = configuration.getMappedStatement(statementName);
             } else if (!mapperInterface.equals(method.getDeclaringClass())) { // issue #35
+                //接口的类和方法的类不相等的时候执行此方法
                 String parentStatementName = method.getDeclaringClass().getName() + "." + method.getName();
                 if (configuration.hasStatement(parentStatementName)) {
                     ms = configuration.getMappedStatement(parentStatementName);
@@ -234,6 +236,7 @@ public class MapperMethod {
             } else {
                 //name = com.asyf.mapper.UserMapper.selectByPrimaryKey
                 name = ms.getId();
+                //type = SELECT (enum)
                 type = ms.getSqlCommandType();
                 if (type == SqlCommandType.UNKNOWN) {
                     throw new BindingException("Unknown execution method for: " + name);
