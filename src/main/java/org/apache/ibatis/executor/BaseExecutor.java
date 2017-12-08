@@ -199,6 +199,7 @@ public abstract class BaseExecutor implements Executor {
             throw new ExecutorException("Executor was closed.");
         }
         CacheKey cacheKey = new CacheKey();
+        // updte 将值添加到 updateList 的集合中
         cacheKey.update(ms.getId());
         cacheKey.update(rowBounds.getOffset());
         cacheKey.update(rowBounds.getLimit());
