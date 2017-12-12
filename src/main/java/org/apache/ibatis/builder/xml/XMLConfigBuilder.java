@@ -55,7 +55,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     private boolean parsed;
     private XPathParser parser;
     private String environment;
-    private ReflectorFactory localReflectorFactory = new DefaultReflectorFactory();
+    private ReflectorFactory localReflectorFactory = new DefaultReflectorFactory();//反射工厂
 
     public XMLConfigBuilder(Reader reader) {
         this(reader, null, null);
@@ -113,7 +113,7 @@ public class XMLConfigBuilder extends BaseBuilder {
             Properties settings = settingsAsProperties(root.evalNode("settings"));
             loadCustomVfs(settings);
             typeAliasesElement(root.evalNode("typeAliases"));
-            pluginElement(root.evalNode("plugins"));
+            pluginElement(root.evalNode("plugins"));//插件
             objectFactoryElement(root.evalNode("objectFactory"));
             objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
             reflectorFactoryElement(root.evalNode("reflectorFactory"));
@@ -188,6 +188,7 @@ public class XMLConfigBuilder extends BaseBuilder {
             for (XNode child : parent.getChildren()) {
                 String interceptor = child.getStringAttribute("interceptor");
                 Properties properties = child.getChildrenAsProperties();
+                //实例化 P 类 （com.asyf.plugin.P）P 实现了 Interceptor 接口
                 Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).newInstance();
                 interceptorInstance.setProperties(properties);
                 configuration.addInterceptor(interceptorInstance);

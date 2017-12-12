@@ -18,13 +18,13 @@ public class HelloServiceMain {
      */
     public static void main(String[] args) {
         //1.JDK动态代理
-       /* HelloServiceProxy helloServiceProxy = new HelloServiceProxy();
+        HelloServiceProxy helloServiceProxy = new HelloServiceProxy();
         HelloService h = (HelloService) helloServiceProxy.bind(new HelloServiceImpl());
-        h.sayHello("张三");*/
+        h.sayHello("张三");
 
         //2.CGLIB动态代理
-        HelloServiceCgLib helloServiceCgLib = new HelloServiceCgLib();
+        /*HelloServiceCgLib helloServiceCgLib = new HelloServiceCgLib();
         HelloServiceImpl h = (HelloServiceImpl) helloServiceCgLib.getInstance(new HelloServiceImpl());
-        h.sayHello("sss");
+        h.sayHello("sss");*/
     }
 }
