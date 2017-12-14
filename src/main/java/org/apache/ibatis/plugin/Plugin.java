@@ -57,7 +57,7 @@ public class Plugin implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.err.println("***动态代理***");
+        //System.err.println("***动态代理***");
         try {
             Set<Method> methods = signatureMap.get(method.getDeclaringClass());
             if (methods != null && methods.contains(method)) {
