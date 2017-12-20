@@ -27,6 +27,7 @@ public class Test {
             UserMapper u = s.getMapper(UserMapper.class);
             User user = u.selectByPrimaryKey(1);
             System.out.println(user.toString());
+            s.commit();
             // List<User> users = u.listAllUser();
             //System.err.println("----------" + users.size());
         } catch (IOException e) {
