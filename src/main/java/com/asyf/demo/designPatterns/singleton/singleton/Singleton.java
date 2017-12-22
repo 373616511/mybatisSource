@@ -1,4 +1,4 @@
-package com.asyf.demo.designPatterns.singleton;
+package com.asyf.demo.designPatterns.singleton.singleton;
 
 /**
  * Created by Administrator on 2017/10/20.

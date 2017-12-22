@@ -1,4 +1,4 @@
-package com.asyf.demo.designPatterns.singleton;
+package com.asyf.demo.designPatterns.singleton.singleton;
 
 /**
  * 面先说一下环境，比如现在有两个类,A和B,两个类都是单例类，这个时候如果A有个B的实例变量，B有个A的实例变量，
