@@ -1,4 +1,4 @@
-package com.asyf.demo.jdk.ArrayList;
+package com.asyf.demo.jdk.arrayList;
 
 import java.util.ArrayList;
 import java.util.List;
