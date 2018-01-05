@@ -1,3 +1,5 @@
+package test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,8 @@ public final class CaseInsensitiveString {
 
     /*@Override
     public boolean equals(Object o) {
-        if (o instanceof CaseInsensitiveString) {
-            return s.equalsIgnoreCase(((CaseInsensitiveString) o).s);
+        if (o instanceof test.CaseInsensitiveString) {
+            return s.equalsIgnoreCase(((test.CaseInsensitiveString) o).s);
         }
         if (o instanceof String) {
             return s.equalsIgnoreCase((String) o);

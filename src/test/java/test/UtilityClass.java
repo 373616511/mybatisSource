@@ -1,3 +1,5 @@
+package test;
+
 import com.mysql.jdbc.AssertionFailedException;
 
 /**
