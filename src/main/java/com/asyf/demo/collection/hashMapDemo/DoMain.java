@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class DoMain {
     public static void main(String[] args) {
-        Map map = new HashMap<>();
+        HashMap map = new HashMap<>();
         map.put("test", "word");
         System.out.println(map.get("test"));
+        System.out.println(true^false);
     }
 }
