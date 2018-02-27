@@ -132,6 +132,7 @@ public class Chromosome {
         }
         int num = 0;
         for (boolean bool : gene) {
+            //左移一位，相当于乘以2的1次方
             num <<= 1;
             if (bool) {
                 num += 1;

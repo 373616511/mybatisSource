@@ -5,8 +5,8 @@ public class GeneticAlgorithmTest extends GeneticAlgorithm {
 
     public static final int NUM = 1 << 24;
 
-    public GeneticAlgorithmTest() {
-        super(24);
+    public GeneticAlgorithmTest(int geneSize) {
+        super(geneSize);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class GeneticAlgorithmTest extends GeneticAlgorithm {
     }
 
     public static void main(String[] args) {
-        GeneticAlgorithmTest test = new GeneticAlgorithmTest();
+        GeneticAlgorithmTest test = new GeneticAlgorithmTest(24);
         test.caculte();
     }
 }
