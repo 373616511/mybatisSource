@@ -25,8 +25,10 @@ public class Test {
             s = sqlSessionFactory.openSession();
             System.out.println("SqlSession--" + s);
             UserMapper u = s.getMapper(UserMapper.class);
-            User user = u.selectByPrimaryKey(1);
-            System.out.println(user.toString());
+            User param = new User();
+            param.setId("1");
+            User user = u.selectByPrimaryKey(param);
+            System.out.println(user == null ? "user对象null" : user.toString());
             s.commit();
             // List<User> users = u.listAllUser();
             //System.err.println("----------" + users.size());
