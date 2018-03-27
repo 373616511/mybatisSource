@@ -15,8 +15,12 @@ package com.asyf.demo.extendsDemo;
 public class B extends A {
     private String a = "a：子类成员变量";
 
+    static {
+        System.out.println("子类静态代码块");
+    }
+
     {
-        System.out.println("子类构造函数执行," + a);
+        System.out.println("子类代码块执行," + a);
     }
 
     public B() {
