@@ -135,4 +135,7 @@ AND a.useable ='1'
 ORDER BY
 	a. NAME
 	</select>
+    <select id="findAllUser" resultType="com.asyf.model.User" parameterType="Map">
+        SELECT * FROM user
+    </select>
 </mapper>

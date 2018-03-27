@@ -1,5 +1,6 @@
 package com.asyf.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +25,6 @@ public interface UserMapper {
 	Integer countUser(Map<String, String> param);
 
 	List<User> listAllUser();
+
+	List<User> findAllUser(HashMap<String, String> stringStringHashMap);
 }

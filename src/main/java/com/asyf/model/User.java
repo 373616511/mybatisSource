@@ -67,7 +67,10 @@ public class User {
                 + email + ", age=" + age + "]";
     }
 
-    public String isAdmin() {
-        return "2";
-    }
+    /*public String isAdmin() {
+        return "1";
+    }*/
+    /*public void isAdmin() {
+     //   return "1";
+    }*/
 }
