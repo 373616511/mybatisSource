@@ -154,11 +154,11 @@
 
         <!-- hadoop start -->
 
-       <!-- <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-core</artifactId>
-            <version>1.2.1</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>org.apache.hadoop</groupId>
+             <artifactId>hadoop-core</artifactId>
+             <version>1.2.1</version>
+         </dependency>-->
 
         <!--<dependency>
             <groupId>org.apache.hadoop</groupId>
@@ -179,9 +179,34 @@
             <version>2.6.5</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+
 
         <!-- hadoop end-->
+        <!--极光推送 -->
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <version>3.3.4</version>
+        </dependency>
 
+        <dependency>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jiguang-common</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.6.Final</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

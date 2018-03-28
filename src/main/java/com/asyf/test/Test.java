@@ -2,8 +2,11 @@ package com.asyf.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -27,8 +30,16 @@ public class Test {
             UserMapper u = s.getMapper(UserMapper.class);
             User param = new User();
             param.setId("1");
-            User user = u.selectByPrimaryKey(param);
-            System.out.println(user == null ? "user对象null" : user.toString());
+            //User user = u.selectByPrimaryKey(param);
+            //System.out.println(user == null ? "user对象null" : user.toString());
+            PageHelper.startPage(1,3);
+            List<User> users = u.findAllUser(new HashMap<String, String>());
+
+            for (User user : users) {
+                System.out.println(user);
+            }
+            PageInfo<User> page = new PageInfo<>(users);
+            System.out.println(page.getPageSize());
             s.commit();
             // List<User> users = u.listAllUser();
             //System.err.println("----------" + users.size());
