@@ -15,6 +15,12 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     private int loss_connect_time = 0;
 
     @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        System.out.println("通道激活，channel=" + ctx.channel().id());
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("server channelRead..");
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + ((ByteBuf) msg).toString(CharsetUtil.UTF_8));
