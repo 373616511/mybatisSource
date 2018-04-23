@@ -188,7 +188,9 @@
 
 
         <!-- hadoop end-->
-        <!--极光推送 -->
+
+
+        <!--极光推送  start-->
         <dependency>
             <groupId>cn.jpush.api</groupId>
             <artifactId>jpush-client</artifactId>
@@ -207,6 +209,7 @@
             <version>4.1.6.Final</version>
             <scope>compile</scope>
         </dependency>
+        <!--极光推送  end-->
 
     </dependencies>
 
