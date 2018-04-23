@@ -46,7 +46,9 @@ public class EchoClient {
                     });
             ChannelFuture f = b.connect().sync(); //6
             f.channel().closeFuture().sync(); //7
+            System.out.println("关闭");
         } finally {
+            System.out.println("finally执行");
             group.shutdownGracefully().sync(); //8
         }
     }

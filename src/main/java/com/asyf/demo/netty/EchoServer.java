@@ -46,7 +46,7 @@ public class EchoServer {
             ChannelFuture f = b.bind().sync(); //8绑定的服务器;sync 等待服务器关闭
             System.out.println(EchoServer.class.getName() + " started and listen on "
                     + f.channel().localAddress());
-            f.channel().closeFuture().sync(); //9关闭 channel 和 块，直到它被关闭
+            ChannelFuture sync = f.channel().closeFuture().sync();//9关闭 channel 和 块，直到它被关闭
             System.out.println("关闭");
         } finally {
             System.out.println("finally执行");
