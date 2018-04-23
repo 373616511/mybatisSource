@@ -47,7 +47,9 @@ public class EchoServer {
             System.out.println(EchoServer.class.getName() + " started and listen on "
                     + f.channel().localAddress());
             f.channel().closeFuture().sync(); //9关闭 channel 和 块，直到它被关闭
+            System.out.println("关闭");
         } finally {
+            System.out.println("finally执行");
             bossGroup.shutdownGracefully().sync(); //10关闭 EventLoopGroup，释放所有资源
             workerGroup.shutdownGracefully().sync();
         }
