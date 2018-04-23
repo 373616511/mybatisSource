@@ -65,6 +65,6 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
             ctx.write("has read message from server");
             ctx.flush();
         }
-        ReferenceCountUtil.release(msg);
+        ReferenceCountUtil.release(msg);//释放
     }
 }

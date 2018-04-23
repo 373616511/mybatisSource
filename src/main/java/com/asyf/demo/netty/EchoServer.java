@@ -26,6 +26,7 @@ public class EchoServer {
     }
 
     public void start() throws Exception {
+        System.out.println("====================启动服务");
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         //3创建 EventLoopGroup

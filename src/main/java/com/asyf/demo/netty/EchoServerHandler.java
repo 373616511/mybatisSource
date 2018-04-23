@@ -8,6 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 
 @ChannelHandler.Sharable //1@Sharable  标识这类的实例之间可以在 channel 里面共享
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
@@ -22,8 +23,10 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("server channelRead..");
+        System.out.println("server channelRead.." + ctx.name());
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + ((ByteBuf) msg).toString(CharsetUtil.UTF_8));
+
+        ReferenceCountUtil.release(msg);//释放
     }
 
     /*@Override
