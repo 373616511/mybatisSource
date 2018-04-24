@@ -1,6 +1,11 @@
 package com.asyf.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String name;
@@ -59,6 +64,26 @@ public class User {
 
     public void setAge(String age) {
         this.age = age == null ? null : age.trim();
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // 比较引用
+        if (this == o) return true;
+        // 比较类型
+        if (o == null || getClass() != o.getClass()) return false;
+        // 比较内容，这里比较的是 id 值
+        User other = (User) o;
+        // 判断逻辑就是：三元运算符 的结果如果等于null 那么就返回 false
+        // 首先确定当前 id 不等于 null，然后确定当前 id 不等于被比较的 id
+        // 最后条件都满足了之后还是不等null，说明肯定不一致就返回 false 就可以了
+        if (id != null ? !id.equals(other.id) : other.id != null) return false;
+        return true;
     }
 
     @Override
