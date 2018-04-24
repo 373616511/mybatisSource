@@ -39,7 +39,7 @@ public enum MongoDBUtil {
     private MongoClient mongoClient;
 
     static {
-        System.out.println("===============MongoDBUtil初始化========================");
+        System.out.println("===============MongoDBUtil初始化开始========================");
         //初始化
         MongoClientOptions.Builder builder = new MongoClientOptions.Builder();
         // options.autoConnectRetry(true);// 自动重连true
@@ -72,6 +72,7 @@ public enum MongoDBUtil {
 
         // 大部分用户使用mongodb都在安全内网下，但如果将mongodb设为安全验证模式，就需要在客户端提供用户名和密码：
         // boolean auth = db.authenticate(myUserName, myPassword);
+        System.out.println("===============MongoDBUtil初始化完成========================");
     }
 
     // ------------------------------------共用方法---------------------------------------------------
@@ -286,9 +287,13 @@ public enum MongoDBUtil {
         // 统计表
         // System.out.println(MongoDBUtil.instance.getCount(coll));
 
-        // 查询所有
-        //Bson filter = Filters.eq("count", 0);
-        //MongoDBUtil.instance.find(coll, filter);
+        // 条件查询
+        Bson filter = Filters.eq("title", "serialize");
+        MongoCursor<Document> documentMongoCursor = MongoDBUtil.instance.find(coll, filter);
+        while (documentMongoCursor.hasNext()) {
+            Document document = documentMongoCursor.next();
+            System.out.println("结果是：" + document);
+        }
 
     }
 
