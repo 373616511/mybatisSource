@@ -1,7 +1,11 @@
 package com.asyf.demo.netty;
 
+import com.asyf.demo.mongodb.MongoDBUtil;
+import com.asyf.util.SerializeUtil;
+import com.mongodb.client.MongoCollection;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -9,6 +13,8 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
+import org.bson.Document;
+import org.bson.types.Binary;
 
 @ChannelHandler.Sharable //1@Sharable  标识这类的实例之间可以在 channel 里面共享
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
@@ -19,6 +25,29 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         System.out.println("通道激活，channel=" + ctx.channel().id());
+        Channel channel = ctx.channel();
+        byte[] bytes = SerializeUtil.serialize(channel);
+        Document document = new Document();
+        document.append("id", "test_netty");
+        document.append("ch", bytes);
+        MongoCollection<Document> collection = MongoDBUtil.instance.getCollection("test", "netty");
+        MongoDBUtil.instance.insertOne(collection, document);
+        Document d = MongoDBUtil.instance.findById(collection, "test_netty");
+        Binary b = (Binary) d.get("ch");
+        byte[] data = b.getData();
+        final Channel c = (Channel) SerializeUtil.unserialize(data);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                ByteBuf byteBuf = Unpooled.copiedBuffer("mongodb", CharsetUtil.UTF_8);
+                c.writeAndFlush(byteBuf);
+            }
+        }).start();
     }
 
     @Override

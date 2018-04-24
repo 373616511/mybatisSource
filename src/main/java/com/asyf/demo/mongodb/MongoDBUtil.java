@@ -144,13 +144,13 @@ public enum MongoDBUtil {
      * @return
      */
     public Document findById(MongoCollection<Document> coll, String id) {
-        ObjectId _idobj = null;
+        /*ObjectId _idobj = null;
         try {
             _idobj = new ObjectId(id);
         } catch (Exception e) {
             return null;
-        }
-        Document myDoc = coll.find(Filters.eq("_id", _idobj)).first();
+        }*/
+        Document myDoc = coll.find(Filters.eq("id", id)).first();
         return myDoc;
     }
 
@@ -178,6 +178,27 @@ public enum MongoDBUtil {
     }
 
     /**
+     * 覆盖插入
+     *
+     * @param coll
+     * @param document
+     */
+    public void insertOne(MongoCollection<Document> coll, Document document) {
+        String id = null;
+        try {
+            id = (String) document.get("id");
+            Document byId = findById(coll, id);
+            if (byId != null) {
+                deleteById(coll, id);
+            }
+            coll.insertOne(document);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * 通过ID删除
      *
      * @param coll
@@ -185,14 +206,14 @@ public enum MongoDBUtil {
      * @return
      */
     public int deleteById(MongoCollection<Document> coll, String id) {
-        int count = 0;
+        int count = 0;/*;
         ObjectId _id = null;
         try {
             _id = new ObjectId(id);
         } catch (Exception e) {
             return 0;
-        }
-        Bson filter = Filters.eq("_id", _id);
+        }*/
+        Bson filter = Filters.eq("id", id);
         DeleteResult deleteResult = coll.deleteOne(filter);
         count = (int) deleteResult.getDeletedCount();
         return count;
@@ -207,13 +228,13 @@ public enum MongoDBUtil {
      * @return
      */
     public Document updateById(MongoCollection<Document> coll, String id, Document newdoc) {
-        ObjectId _idobj = null;
+       /* ObjectId _idobj = null;
         try {
             _idobj = new ObjectId(id);
         } catch (Exception e) {
             return null;
-        }
-        Bson filter = Filters.eq("_id", _idobj);
+        }*/
+        Bson filter = Filters.eq("id", id);
         // coll.replaceOne(filter, newdoc); // 完全替代
         coll.updateOne(filter, new Document("$set", newdoc));
         return newdoc;
@@ -245,21 +266,26 @@ public enum MongoDBUtil {
         MongoCollection<Document> coll = MongoDBUtil.instance.getCollection(dbName, collName);
 
         // 插入多条
-        // for (int i = 1; i <= 4; i++) {
-        // Document doc = new Document();
-        // doc.put("name", "zhoulf");
-        // doc.put("school", "NEFU" + i);
-        // Document interests = new Document();
-        // interests.put("game", "game" + i);
-        // interests.put("ball", "ball" + i);
-        // doc.put("interests", interests);
-        // coll.insertOne(doc);
-        // }
+        for (int i = 1; i <= 4; i++) {
+            Document doc = new Document();
+            doc.append("id", "test_id");
+            doc.put("name", "zhoulf");
+            doc.put("school", "NEFU" + i);
+            Document interests = new Document();
+            interests.put("game", "game" + i);
+            interests.put("ball", "ball" + i);
+            doc.put("interests", interests);
+            System.out.println(doc.get("id"));
+            MongoDBUtil.instance.insertOne(coll, doc);
+            //coll.insertOne(doc);
+        }
+        //根据id删除
+        //MongoDBUtil.instance.deleteById(coll, "test_id");
 
         // // 根据ID查询
-        // String id = "556925f34711371df0ddfd4b";
-        // Document doc = MongoDBUtil2.instance.findById(coll, id);
-        // System.out.println(doc);
+        String id = "test_id";
+        Document doc = MongoDBUtil.instance.findById(coll, id);
+        System.out.println("查询结果：" + doc);
 
         // 查询多个
         // MongoCursor<Document> cursor1 = coll.find(Filters.eq("name", "zhoulf")).iterator();
@@ -279,9 +305,9 @@ public enum MongoDBUtil {
         // MongoDBUtil2.instance.dropCollection(dbName, collName);
 
         // 修改数据
-        // String id = "556949504711371c60601b5a";
-        // Document newdoc = new Document();
-        // newdoc.put("name", "时候");
+        //String id = "556949504711371c60601b5a";
+        Document newdoc = new Document();
+        newdoc.put("name", "时候");
         // MongoDBUtil.instance.updateById(coll, id, newdoc);
 
         // 统计表
