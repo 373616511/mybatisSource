@@ -2,6 +2,7 @@ package com.asyf.demo.netty;
 
 import com.asyf.demo.mongodb.MongoDBUtil;
 import com.asyf.util.SerializeUtil;
+import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -16,45 +17,33 @@ import io.netty.util.ReferenceCountUtil;
 import org.bson.Document;
 import org.bson.types.Binary;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @ChannelHandler.Sharable //1@Sharable  标识这类的实例之间可以在 channel 里面共享
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
-
+    // private static final Map<String, Channel> map = new HashMap<>();
     private int loss_connect_time = 0;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         System.out.println("通道激活，channel=" + ctx.channel().id());
-        Channel channel = ctx.channel();
-        byte[] bytes = SerializeUtil.serialize(channel);
-        Document document = new Document();
-        document.append("id", "test_netty");
-        document.append("ch", bytes);
-        MongoCollection<Document> collection = MongoDBUtil.instance.getCollection("test", "netty");
-        MongoDBUtil.instance.insertOne(collection, document);
-        Document d = MongoDBUtil.instance.findById(collection, "test_netty");
-        Binary b = (Binary) d.get("ch");
-        byte[] data = b.getData();
-        final Channel c = (Channel) SerializeUtil.unserialize(data);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                ByteBuf byteBuf = Unpooled.copiedBuffer("mongodb", CharsetUtil.UTF_8);
-                c.writeAndFlush(byteBuf);
-            }
-        }).start();
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("server channelRead.." + ctx.name());
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + ((ByteBuf) msg).toString(CharsetUtil.UTF_8));
+        Message message = (Message) msg;
+        // String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
+        // Gson gson = new Gson();
+        //Message message = gson.fromJson(str, Message.class);
+        if ("1".equals(message.getType())) {
+            ChannelManager.put("test", ctx.channel());
+        } else {
 
+        }
         ReferenceCountUtil.release(msg);//释放
     }
 
@@ -69,6 +58,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx,
                                 Throwable cause) {
         cause.printStackTrace(); //5打印异常堆栈跟踪
+        ChannelManager.remove("test");
         ctx.close(); //6关闭通道
     }
 
@@ -78,11 +68,12 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
                 loss_connect_time++;
-                System.out.println("5 秒没有接收到客户端的信息了,id=" + ctx.channel().id());
+                System.out.println("60 秒没有接收到客户端的信息了,id=" + ctx.channel().id());
                 ByteBuf byteBuf = Unpooled.copiedBuffer("Heartbeat", CharsetUtil.UTF_8);
                 ctx.channel().writeAndFlush(byteBuf);
                 if (loss_connect_time > 2) {
                     System.out.println("关闭这个不活跃的channel");
+                    ChannelManager.remove("test");
                     ctx.channel().close();
                 }
             }

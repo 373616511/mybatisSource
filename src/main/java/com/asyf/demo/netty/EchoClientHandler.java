@@ -51,7 +51,8 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
                 if (currentTime <= TRY_TIMES) {
                     System.out.println("currentTime:" + currentTime);
                     currentTime++;
-                    ctx.channel().writeAndFlush(HEARTBEAT_SEQUENCE.duplicate());
+                    Message message = new Message("1", "类型是1");
+                    //ctx.channel().writeAndFlush(HEARTBEAT_SEQUENCE.duplicate());
                 }
             }
         }
