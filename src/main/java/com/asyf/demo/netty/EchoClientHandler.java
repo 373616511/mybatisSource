@@ -15,7 +15,7 @@ import java.util.Date;
 @ChannelHandler.Sharable //1@Sharable  标记这个类的实例可以在 channel 里共享
 public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
-    private static final int TRY_TIMES = 3;
+    private static final int TRY_TIMES = 300;
     private int currentTime = 0;
     private static final ByteBuf HEARTBEAT_SEQUENCE = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Heartbeat心跳",
             CharsetUtil.UTF_8));
@@ -52,6 +52,8 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
                     System.out.println("currentTime:" + currentTime);
                     currentTime++;
                     Message message = new Message("1", "类型是1");
+                    ByteBuf byteBuf = Unpooled.copiedBuffer(JsonUtil.toJson(message), CharsetUtil.UTF_8);
+                    ctx.channel().writeAndFlush(byteBuf);
                     //ctx.channel().writeAndFlush(HEARTBEAT_SEQUENCE.duplicate());
                 }
             }
@@ -60,11 +62,14 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String message = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
+        String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
+        Message message = JsonUtil.fromJson(str, Message.class);
         System.out.println(message);
-        if (message.equals("Heartbeat")) {
+        if (message.getType().equals("1")) {
             ctx.write("has read message from server");
             ctx.flush();
+        } else {
+            System.err.println("收到了未知类型的数据");
         }
         ReferenceCountUtil.release(msg);//释放
     }

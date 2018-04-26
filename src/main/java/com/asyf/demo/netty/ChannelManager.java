@@ -1,6 +1,9 @@
 package com.asyf.demo.netty;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
+import io.netty.util.CharsetUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +29,8 @@ public class ChannelManager {
 
     public static void push(String key, Message message) {
         Channel channel = get(key);
-        channel.writeAndFlush(message);
+        ByteBuf byteBuf = Unpooled.copiedBuffer(JsonUtil.toJson(message), CharsetUtil.UTF_8);
+        channel.writeAndFlush(byteBuf);
     }
 
 }

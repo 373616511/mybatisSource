@@ -35,10 +35,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.println("server channelRead.." + ctx.name());
         System.out.println(ctx.channel().remoteAddress() + "->Server :" + ((ByteBuf) msg).toString(CharsetUtil.UTF_8));
-        Message message = (Message) msg;
-        // String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
-        // Gson gson = new Gson();
-        //Message message = gson.fromJson(str, Message.class);
+        String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
+        Message message = JsonUtil.fromJson(str, Message.class);
         if ("1".equals(message.getType())) {
             ChannelManager.put("test", ctx.channel());
         } else {
@@ -69,7 +67,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
             if (event.state() == IdleState.READER_IDLE) {
                 loss_connect_time++;
                 System.out.println("60 秒没有接收到客户端的信息了,id=" + ctx.channel().id());
-                ByteBuf byteBuf = Unpooled.copiedBuffer("Heartbeat", CharsetUtil.UTF_8);
+                Message message = new Message("1", "心态检测");
+                ByteBuf byteBuf = Unpooled.copiedBuffer(JsonUtil.toJson(message), CharsetUtil.UTF_8);
                 ctx.channel().writeAndFlush(byteBuf);
                 if (loss_connect_time > 2) {
                     System.out.println("关闭这个不活跃的channel");

@@ -22,21 +22,25 @@ public class EchoServer {
 
     public static void main(String[] args) throws Exception {
         int port = Integer.parseInt("8088"); //1设置端口值
-        new EchoServer(port).start(); //2呼叫服务器的 start() 方法
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(30000);
+                    System.out.println("===========================");
+                    Thread.sleep(20000);
+                    System.out.println("===========================");
                     Message message = new Message();
                     message.setMsg("测试消息");
                     message.setType("2");
                     ChannelManager.push("test", message);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        new EchoServer(port).start(); //2呼叫服务器的 start() 方法
+
     }
 
     public void start() throws Exception {
