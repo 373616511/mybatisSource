@@ -16,6 +16,7 @@ import org.bson.types.ObjectId;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -268,16 +269,15 @@ public enum MongoDBUtil {
         // 插入多条
         for (int i = 1; i <= 4; i++) {
             Document doc = new Document();
-            doc.append("id", "test_id");
-            doc.put("name", "zhoulf");
+            doc.append("id", "test_id2");
+            doc.put("name", "zhoulf222");
             doc.put("school", "NEFU" + i);
             Document interests = new Document();
             interests.put("game", "game" + i);
             interests.put("ball", "ball" + i);
             doc.put("interests", interests);
             System.out.println(doc.get("id"));
-            MongoDBUtil.instance.insertOne(coll, doc);
-            //coll.insertOne(doc);
+            //MongoDBUtil.instance.insertOne(coll, doc);
         }
         //根据id删除
         //MongoDBUtil.instance.deleteById(coll, "test_id");
@@ -314,8 +314,12 @@ public enum MongoDBUtil {
         // System.out.println(MongoDBUtil.instance.getCount(coll));
 
         // 条件查询
-        Bson filter = Filters.eq("title", "serialize");
-        MongoCursor<Document> documentMongoCursor = MongoDBUtil.instance.find(coll, filter);
+        Bson filter = Filters.eq("id", "test_id");
+        Bson filter2 = Filters.eq("name", "zhoulf222");
+        //or查询
+        Bson b = Filters.or(Arrays.asList(filter, filter2));
+        MongoCursor<Document> documentMongoCursor = MongoDBUtil.instance.find(coll, b);
+
         while (documentMongoCursor.hasNext()) {
             Document document = documentMongoCursor.next();
             System.out.println("结果是：" + document);
