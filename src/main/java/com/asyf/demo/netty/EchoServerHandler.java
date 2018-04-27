@@ -38,7 +38,8 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         Message message = JsonUtil.fromJson(str, Message.class);
         if ("1".equals(message.getType())) {
-            ChannelManager.put("test", ctx.channel());
+            //ChannelManager.put("test", ctx.channel());
+            ChannelManager.login(message, ctx.channel());
         } else {
 
         }

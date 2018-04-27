@@ -308,7 +308,7 @@ public enum MongoDBUtil {
         //String id = "556949504711371c60601b5a";
         Document newdoc = new Document();
         newdoc.put("name", "时候");
-        // MongoDBUtil.instance.updateById(coll, id, newdoc);
+        MongoDBUtil.instance.updateById(coll, id, newdoc);
 
         // 统计表
         // System.out.println(MongoDBUtil.instance.getCount(coll));
