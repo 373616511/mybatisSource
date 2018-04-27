@@ -88,6 +88,7 @@ public class ChannelManager {
             result.setMsg("error登录失败");
             result.setMsgCode("1001");
             push(channel, result);
+            return false;
         }
         return true;
     }

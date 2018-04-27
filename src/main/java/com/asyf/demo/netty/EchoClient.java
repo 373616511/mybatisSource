@@ -50,6 +50,10 @@ public class EchoClient {
         } finally {
             System.out.println("finally执行");
             group.shutdownGracefully().sync(); //8
+            Thread.sleep(10000);
+            System.out.println("准备重连");
+            start();
+            System.out.println("重连成功");
         }
     }
 

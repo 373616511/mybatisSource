@@ -39,9 +39,13 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         Message message = JsonUtil.fromJson(str, Message.class);
         if ("1".equals(message.getType())) {
             //ChannelManager.put("test", ctx.channel());
-            ChannelManager.login(message, ctx.channel());
-        } else {
-
+            boolean login = ChannelManager.login(message, ctx.channel());
+            if (!login) {
+                //登录失败关闭连接
+                ctx.channel().close();
+            }
+        } else if ("0".equals(message.getType())) {
+            System.out.println("心跳检测");
         }
         ReferenceCountUtil.release(msg);//释放
     }
