@@ -23,7 +23,11 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     private int currentTime = 0;
     private static final ByteBuf HEARTBEAT_SEQUENCE = Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("Heartbeat心跳",
             CharsetUtil.UTF_8));
+    private static int i;
 
+    private synchronized int getI() {
+        return i++;
+    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -35,12 +39,13 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     }
 
     private boolean login(Channel channel) {
+        int a = getI();
         Message message = new Message();
-        message.setUserId("userid_ooo");
+        message.setUserId("userid_" + a);
         message.setToken("testtoken");
         message.setAppKey("testappkey");
-        message.setGroup("group000");
-        message.setAlias("alias000");
+        message.setGroup("group_" + 0);
+        message.setAlias("alias_" + a);
         message.setType("1");
         ByteBuf byteBuf = Unpooled.copiedBuffer(JsonUtil.toJson(message), CharsetUtil.UTF_8);
         channel.writeAndFlush(byteBuf);
@@ -83,7 +88,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String str = ((ByteBuf) msg).toString(CharsetUtil.UTF_8);
         Message message = JsonUtil.fromJson(str, Message.class);
-        System.out.println(message);
+        System.out.println(Thread.currentThread() + "收到了数据：" + message);
         if (message.getType().equals("1")) {
             //ctx.write("has read message from server....." + message.toString());
             //ctx.flush();

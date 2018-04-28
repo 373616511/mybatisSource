@@ -25,7 +25,19 @@ public class EchoClient {
     public static void main(String[] args) throws Exception {
         final String host = "127.0.0.1";
         final int port = Integer.parseInt("8088");
-        new EchoClient(host, port).start();
+        for (int i = 0; i < 10; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        new EchoClient(host, port).start();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+        }
     }
 
     public void start() throws Exception {
@@ -40,7 +52,7 @@ public class EchoClient {
                         @Override
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
-                            ch.pipeline().addLast("ping", new IdleStateHandler(0, 4, 0, TimeUnit.SECONDS))
+                            ch.pipeline().addLast("ping", new IdleStateHandler(0, 200, 0, TimeUnit.SECONDS))
                                     .addLast(new EchoClientHandler());
                         }
                     });
