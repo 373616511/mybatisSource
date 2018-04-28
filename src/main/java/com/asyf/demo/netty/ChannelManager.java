@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChannelManager {
-    private static final Map<String, Channel> channelMap = new HashMap<>();
+    public static final Map<String, Channel> channelMap = new HashMap<>();
     private static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     private ChannelManager() {

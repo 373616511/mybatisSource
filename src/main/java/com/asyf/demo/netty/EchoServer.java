@@ -1,16 +1,15 @@
 package com.asyf.demo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 
 import java.net.InetSocketAddress;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class EchoServer {
@@ -33,6 +32,11 @@ public class EchoServer {
                     message.setMsg("测试消息");
                     message.setType("2");
                     ChannelManager.push("test", message);
+                    Map<String, Channel> channelMap = ChannelManager.channelMap;
+                    Set<String> set = channelMap.keySet();
+                    for (String s : set) {
+                        System.err.println(channelMap.get(s));
+                    }
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
