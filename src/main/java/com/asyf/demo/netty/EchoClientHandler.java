@@ -36,7 +36,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
     private boolean login(Channel channel) {
         Message message = new Message();
-        message.setUserId(String.valueOf(UUID.randomUUID()));
+        message.setUserId("userid_ooo");
         message.setToken("testtoken");
         message.setAppKey("testappkey");
         message.setGroup("group000");
@@ -89,7 +89,7 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
             //ctx.flush();
             System.out.println("登录结果：" + message.toString());
         } else {
-            System.err.println("收到了未知类型的数据");
+            System.err.println("收到了未知类型的数据,message=" + message);
         }
         ReferenceCountUtil.release(msg);//释放
     }
