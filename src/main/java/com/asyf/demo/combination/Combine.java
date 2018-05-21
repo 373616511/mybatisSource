@@ -2,7 +2,6 @@ package com.asyf.demo.combination;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,11 +16,13 @@ import java.util.List;
 public class Combine {
 
     public static void main(String[] args) {
-        List<Character> data = new ArrayList<Character>();
-        data.add('a');
-        data.add('b');
-        data.add('c');
-        data.add('d');
+        List<String> data = new ArrayList<String>();
+        data.add("物理");
+        data.add("化学");
+        data.add("政治");
+        data.add("生物");
+        data.add("历史");
+        data.add("地理");
         //去重的操作放在组合之前进行就不会出现重复的组合了
         //data.add('d');
         Combine t = new Combine();
@@ -29,7 +30,11 @@ public class Combine {
         /*for (int i = 1; i < data.size(); i++) {
             t.combinerSelect(data, new ArrayList<Character>(), data.size(), i);
         }*/
-        t.combinerSelect(data, new ArrayList<Character>(), data.size(), 2);
+        List<Object[]> list = new ArrayList<>();
+        t.combinerSelect(data, new ArrayList<String>(), data.size(), 2, list);
+        for (Object[] objects : list) {
+            System.out.println(objects[0] + "---" + objects[1]);
+        }
     }
 
     /**
@@ -43,16 +48,21 @@ public class Combine {
      * @param data      原始数据
      * @param workSpace 自定义一个临时空间，用来存储每次符合条件的值
      * @param k         C(n,k)中的k
+     * @param list
      */
-    public <E> void combinerSelect(List<E> data, List<E> workSpace, int n, int k) {
+    public <E> void combinerSelect(List<E> data, List<E> workSpace, int n, int k, List<Object[]> list) {
         List<E> copyData;
         List<E> copyWorkSpace;
 
         if (workSpace.size() == k) {
+            Object[] a = new Object[k];
+            int i = 0;
             for (Object c : workSpace) {
-                System.out.print(c);
+                //System.out.print(c);
+                a[i++] = c;
             }
-            System.out.println();
+            list.add(a);
+            // System.out.println();
         }
 
         for (int i = 0; i < data.size(); i++) {
@@ -63,7 +73,7 @@ public class Combine {
             for (int j = i; j >= 0; j--) {
                 copyData.remove(j);
             }
-            combinerSelect(copyData, copyWorkSpace, n, k);
+            combinerSelect(copyData, copyWorkSpace, n, k, list);
         }
 
     }
