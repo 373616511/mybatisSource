@@ -13,5 +13,7 @@ public class Test {
             }
         }
         System.err.println(index);
+        String a = "123456";
+        System.out.println(a.substring(0, a.length()-1));
     }
 }
