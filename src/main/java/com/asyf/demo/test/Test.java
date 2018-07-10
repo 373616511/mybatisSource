@@ -12,8 +12,13 @@ public class Test {
                 break;
             }
         }
-        System.err.println(index);
+        //System.err.println(index);
         String a = "123456";
-        System.out.println(a.substring(0, a.length()-1));
+        // System.out.println(a.substring(0, a.length()-1));
+        int c = 7;
+        int bb = c / 3;
+        for (int i = c - 1; i / 3 >= bb && i > -1; i--) {
+            System.out.println(i + "---" + i % 3 + "---" + i / 3);
+        }
     }
 }
