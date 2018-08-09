@@ -25,7 +25,7 @@ public class EchoClient {
     public static void main(String[] args) throws Exception {
         final String host = "127.0.0.1";
         final int port = Integer.parseInt("8088");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
