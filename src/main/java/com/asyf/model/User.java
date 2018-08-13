@@ -1,6 +1,7 @@
 package com.asyf.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class User implements Serializable {
 
@@ -17,6 +18,16 @@ public class User implements Serializable {
     private String email;
 
     private String age;
+
+    private Timestamp createDate;
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
 
     public String getId() {
         return id;

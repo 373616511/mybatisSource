@@ -219,6 +219,13 @@
         </dependency>
         <!-- mongodn end -->
 
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

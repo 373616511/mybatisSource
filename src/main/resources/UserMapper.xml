@@ -24,15 +24,16 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
     <insert id="insert" parameterType="com.asyf.model.User">
-		insert into user (id, name,
+		insert into user ( name,
 		username,
-		password, email, age
+		password, email, age,create_date
 		)
-		values (#{id,jdbcType=INTEGER},
+		values (
 		#{name,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR},
 		#{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-		#{age,jdbcType=VARCHAR}
+		#{age,jdbcType=VARCHAR},
+		#{createDate}
 		)
 	</insert>
     <insert id="insertSelective" parameterType="com.asyf.model.User">

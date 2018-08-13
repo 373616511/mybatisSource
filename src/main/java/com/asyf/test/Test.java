@@ -2,6 +2,8 @@ package com.asyf.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,15 +30,28 @@ public class Test {
             s = sqlSessionFactory.openSession();
             System.out.println("SqlSession--" + s);
             UserMapper u = s.getMapper(UserMapper.class);
+            int num = 0;
+            while (num++ < 1000000) {
+                //
+                User u2 = new User();
+                //u2.setId("27187");
+                u2.setCreateDate(new Timestamp(System.currentTimeMillis()));
+                u2.setName("ceshi" + num);
+                u2.setUsername("username");
+                u2.setAge("23");
+                u2.setEmail("sahjhdja");
+                u.insert(u2);
+            }
+            //
             User param = new User();
             param.setId("1");
             //User user = u.selectByPrimaryKey(param);
             //System.out.println(user == null ? "user对象null" : user.toString());
-            PageHelper.startPage(1,3);
+            PageHelper.startPage(1, 3);
             List<User> users = u.findAllUser(new HashMap<String, String>());
 
             for (User user : users) {
-                System.out.println(user);
+                System.out.println(user + "--");
             }
             PageInfo<User> page = new PageInfo<>(users);
             System.out.println(page.getPageSize());
