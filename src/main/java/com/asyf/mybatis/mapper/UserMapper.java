@@ -1,10 +1,10 @@
-package com.asyf.mapper;
+package com.asyf.mybatis.mapper;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.asyf.model.User;
+import com.asyf.mybatis.model.User;
 
 
 public interface UserMapper {

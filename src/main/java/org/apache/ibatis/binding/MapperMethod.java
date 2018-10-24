@@ -213,7 +213,7 @@ public class MapperMethod {
         private final SqlCommandType type;
 
         public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
-            //执行结果：com.asyf.mapper.UserMapper.selectByPrimaryKey
+            //执行结果：com.asyf.mybatis.mapper.UserMapper.selectByPrimaryKey
             String statementName = mapperInterface.getName() + "." + method.getName();
             MappedStatement ms = null;
             //String parentStatementNameTEST = method.getDeclaringClass().getName() + "." + method.getName();
@@ -234,7 +234,7 @@ public class MapperMethod {
                     throw new BindingException("Invalid bound statement (not found): " + statementName);
                 }
             } else {
-                //name = com.asyf.mapper.UserMapper.selectByPrimaryKey
+                //name = com.asyf.mybatis.mapper.UserMapper.selectByPrimaryKey
                 name = ms.getId();
                 //type = SELECT (enum)
                 type = ms.getSqlCommandType();
@@ -266,7 +266,7 @@ public class MapperMethod {
         private final ParamNameResolver paramNameResolver;
 
         public MethodSignature(Configuration configuration, Class<?> mapperInterface, Method method) {
-            //resolvedReturnType = class com.asyf.model.User
+            //resolvedReturnType = class com.asyf.mybatis.model.User
             Type resolvedReturnType = TypeParameterResolver.resolveReturnType(method, mapperInterface);
             if (resolvedReturnType instanceof Class<?>) {
                 this.returnType = (Class<?>) resolvedReturnType;

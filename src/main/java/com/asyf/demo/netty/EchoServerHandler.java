@@ -1,7 +1,6 @@
 package com.asyf.demo.netty;
 
-import com.asyf.demo.mongodb.MongoDBUtil;
-import com.asyf.util.SerializeUtil;
+import com.asyf.mybatis.util.SerializeUtil;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoCollection;
 import io.netty.buffer.ByteBuf;
@@ -16,9 +15,6 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.ReferenceCountUtil;
 import org.bson.Document;
 import org.bson.types.Binary;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @ChannelHandler.Sharable //1@Sharable  标识这类的实例之间可以在 channel 里面共享
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {

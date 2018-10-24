@@ -188,7 +188,7 @@ public class XMLConfigBuilder extends BaseBuilder {
             for (XNode child : parent.getChildren()) {
                 String interceptor = child.getStringAttribute("interceptor");
                 Properties properties = child.getChildrenAsProperties();
-                //实例化 P 类 （com.asyf.plugin.P）P 实现了 Interceptor 接口
+                //实例化 P 类 （com.asyf.mybatis.plugin.P）P 实现了 Interceptor 接口
                 Interceptor interceptorInstance = (Interceptor) resolveClass(interceptor).newInstance();
                 interceptorInstance.setProperties(properties);
                 configuration.addInterceptor(interceptorInstance);

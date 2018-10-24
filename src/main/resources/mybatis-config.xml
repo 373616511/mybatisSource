@@ -5,7 +5,7 @@
 <configuration>
 
     <plugins>
-        <plugin interceptor="com.asyf.plugin.P">
+        <plugin interceptor="com.asyf.mybatis.plugin.P">
             <property name="someProperty" value="100"/>
         </plugin>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">

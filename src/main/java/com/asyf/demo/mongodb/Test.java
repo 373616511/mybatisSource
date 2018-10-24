@@ -1,7 +1,7 @@
 package com.asyf.demo.mongodb;
 
-import com.asyf.model.User;
-import com.asyf.util.SerializeUtil;
+import com.asyf.mybatis.model.User;
+import com.asyf.mybatis.util.SerializeUtil;
 import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -13,7 +13,6 @@ import org.bson.Document;
 import org.bson.types.Binary;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Test {

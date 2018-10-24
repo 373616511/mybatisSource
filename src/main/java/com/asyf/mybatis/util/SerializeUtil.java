@@ -1,4 +1,4 @@
-package com.asyf.util;
+package com.asyf.mybatis.util;
 
 import java.io.*;
 

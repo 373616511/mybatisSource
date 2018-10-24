@@ -1,4 +1,4 @@
-package com.asyf.model;
+package com.asyf.mybatis.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

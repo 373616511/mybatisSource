@@ -3,7 +3,6 @@ package com.asyf.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,8 +13,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.asyf.mapper.UserMapper;
-import com.asyf.model.User;
+import com.asyf.mybatis.mapper.UserMapper;
+import com.asyf.mybatis.model.User;
 
 public class Test {
 
