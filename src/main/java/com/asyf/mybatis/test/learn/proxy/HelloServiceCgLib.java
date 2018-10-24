@@ -1,4 +1,4 @@
-package com.asyf.test.learn.proxy;
+package com.asyf.mybatis.test.learn.proxy;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

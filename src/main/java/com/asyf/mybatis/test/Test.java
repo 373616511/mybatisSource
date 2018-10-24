@@ -1,4 +1,4 @@
-package com.asyf.test;
+package com.asyf.mybatis.test;
 
 import java.io.IOException;
 import java.io.InputStream;

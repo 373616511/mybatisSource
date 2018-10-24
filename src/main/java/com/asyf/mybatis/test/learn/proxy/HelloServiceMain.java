@@ -1,4 +1,4 @@
-package com.asyf.test.learn.proxy;
+package com.asyf.mybatis.test.learn.proxy;
 
 /**
  * Created by Administrator on 2017/10/19.

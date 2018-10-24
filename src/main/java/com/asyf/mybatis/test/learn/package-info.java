@@ -4,4 +4,4 @@
  * 《深入浅出MyBatis技术原理与实战》阅读demo
  * mybatis源码阅读必备的基础知识学习
  */
-package com.asyf.test.learn;
+package com.asyf.mybatis.test.learn;
