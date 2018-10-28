@@ -1,4 +1,4 @@
-package com.asyf.mybatis.test.learn.proxy;
+package com.asyf.demo.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package com.asyf.mybatis.test.learn.reflect;
+package com.asyf.demo.reflect;
 
 import java.lang.reflect.Method;
 
