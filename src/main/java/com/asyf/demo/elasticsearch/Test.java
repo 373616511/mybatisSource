@@ -1,3 +1,4 @@
+/*
 package com.asyf.demo.elasticsearch;
 
 import com.google.gson.Gson;
@@ -88,10 +89,12 @@ public class Test {
         AnalyzeResponse analyzeTokens = analyzeRequestBuilder.get();
         List<AnalyzeResponse.AnalyzeToken> list = analyzeTokens.getTokens();
         //Bool Query 用于组合多个叶子或复合查询子句的默认查询
-        /*must 相当于 与 & =
+        */
+/*must 相当于 与 & =
                 must not 相当于 非 ~   ！=
         should 相当于 或  |   or
-        filter  过滤*/
+        filter  过滤*//*
+
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
 
         for (AnalyzeResponse.AnalyzeToken term : list) {
@@ -139,12 +142,14 @@ public class Test {
     }
 
     private static void update(TransportClient client) throws Exception {
-        /*UpdateRequest updateRequest = new UpdateRequest("test_index", "test_type", "test_id");
+        */
+/*UpdateRequest updateRequest = new UpdateRequest("test_index", "test_type", "test_id");
         updateRequest.doc(jsonBuilder()
                 .startObject()
                 .field("gender", "male")//没有则添加
                 .field("user", "user_test")
-                .endObject());*/
+                .endObject());*//*
+
         //There is also support for upsert. If the document does not exist,
         // the content of the upsert element will be used to index the fresh doc:
         IndexRequest indexRequest = new IndexRequest("test_index", "test_type", "test_id44");
@@ -219,9 +224,12 @@ public class Test {
         }
 
         // Map<String, Object> json = new HashMap<String, Object>();
-        /*json.put("user", "kimchy");
+        */
+/*json.put("user", "kimchy");
         json.put("postDate", new Date());
-        json.put("message", "trying out Elasticsearch");*/
+        json.put("message", "trying out Elasticsearch");*//*
+
     }
     // }
 }
+*/

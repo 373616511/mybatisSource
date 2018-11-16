@@ -1,3 +1,4 @@
+/*
 package com.asyf.demo.elasticsearch;
 
 import com.google.gson.Gson;
@@ -38,11 +39,13 @@ public class EsClientUtil {
         throw new RuntimeException("EsClientUtil is singleton");
     }
 
-    /**
+    */
+/**
      * 获取客户端方法
      *
      * @return
-     */
+     *//*
+
     public static TransportClient getEsClient() {
         if (client == null) {
             synchronized (EsClientUtil.class) {
@@ -100,9 +103,11 @@ public class EsClientUtil {
                 .build();
     }
 
-    /**
+    */
+/**
      * 初始化es客户端
-     */
+     *//*
+
     private static void initEsClient() throws Exception {
         Settings settings = Settings.settingsBuilder()
                 .put("cluster.name", clusterName)//设置集群名称
@@ -177,3 +182,4 @@ public class EsClientUtil {
 
     }
 }
+*/
