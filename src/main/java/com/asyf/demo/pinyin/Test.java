@@ -21,12 +21,12 @@ public class Test {
 
         Map<String, Object> emp3 = new HashMap<>();
         emp3.put("empId", 12975273);
-        emp3.put("empName", "孙越");
+        emp3.put("empName", "孙涤非");
         emp3.put("level", "20");
 
+        list.add(emp3);
         list.add(emp1);
         list.add(emp2);
-        list.add(emp3);
 
         for (Map<String, Object> m : list) {
             String empName = (String) m.get("empName");
