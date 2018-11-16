@@ -1,11 +1,14 @@
 package com.asyf.demo.elasticsearch.es5_6;
 
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -36,10 +39,29 @@ public class EsUtils {
         return client;
     }
 
+    public static void createIndex(String index, String type) throws IOException {
+        TransportClient transportClient = getSingleTransportClient();
+        CreateIndexRequestBuilder createIndex = transportClient.admin().indices().prepareCreate(index);
+        /*XContentBuilder mapping = XContentFactory.jsonBuilder()
+                .startObject()
+                .startObject("properties") //设置之定义字段
+                .startObject("name").field("type", "text").field("analyzed", "standard").endObject() //设置分析器
+                .startObject("age").field("type", "long").endObject()
+                .startObject("class_name").field("type", "keyword").endObject()
+                .startObject("birth").field("type", "date").field("format", "yyyy-MM-dd").endObject()//设置Date的格式
+                .endObject()
+                .endObject();*/
+        //createIndex.addMapping(type, mapping);
+        CreateIndexResponse res = createIndex.execute().actionGet();
+
+    }
+
     //测试入口
-    public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws Exception {
         TransportClient client = EsUtils.getSingleTransportClient();
         GetResponse getResponse = client.prepareGet("test", "list001", "5").get();
         System.out.println(getResponse.getSourceAsString());
+        //创建索引
+        createIndex("test2", "test_type");
     }
 }
