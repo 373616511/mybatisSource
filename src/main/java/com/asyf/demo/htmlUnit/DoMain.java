@@ -51,8 +51,10 @@ public class DoMain {
         for (HtmlElement htmlElement : li) {
             DomNodeList<HtmlElement> a = htmlElement.getElementsByTagName("a");
             String id = htmlElement.getAttribute("id");
+
             if (a != null) {
                 HtmlElement e = a.get(0);
+                List<Object> byXPath = e.getByXPath("//p[@class='price']");
                 String title = e.getAttribute("title");
                 DomNodeList<HtmlElement> img = e.getElementsByTagName("img");
                 HtmlElement htmlElement1 = img.get(0);
